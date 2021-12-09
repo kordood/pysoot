@@ -67,6 +67,7 @@ class Lifter(object):
 
         l.info("Running Soot with the following config: " + repr(config))
         self.soot_wrapper.init(config)
+        self.soot_wrapper.parse_json()
         if self.save_to_file is None:
             self.classes = self.soot_wrapper.get_classes()
         else:
