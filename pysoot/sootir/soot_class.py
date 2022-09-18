@@ -53,7 +53,8 @@ class SootClass(object):
             fields[field.getName()] = (convert_soot_attributes(field.getModifiers()), str(field.getType()))
 
         interface_names = [it.getName() for it in ir_class.getInterfaces()]
-        if class_name != "java.lang.Object":
+        # if class_name != "java.lang.Object":
+        if ir_class.hasSuperclass():
             super_class = ir_class.getSuperclass().getName()
         else:
             super_class = ""
