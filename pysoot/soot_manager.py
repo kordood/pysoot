@@ -1,8 +1,9 @@
 # this file is executed exclusively in Jython
-
+import shutil
 import sys
 import os
 import logging
+import tempfile
 
 l = logging.getLogger("pysoot.soot_manager")
 
@@ -165,6 +166,10 @@ class SootManager(object):
         subprocess.call(cmd, shell=True)
 
     def load_json(self):
+        tmp_dir = tempfile.mkdtemp()
+        _, file_name = os.path.split(self.json_file)
+        shutil.move(self.json_file, tmp_dir)
+        self.json_file = os.path.join(tmp_dir, file_name)
         self.method_json = json.load(open(self.json_file))
 
     def parse_json(self):
