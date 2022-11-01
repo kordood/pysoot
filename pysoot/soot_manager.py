@@ -198,8 +198,6 @@ class SootManager(object):
                 stmt_list = list()
 
                 _counter = 0
-                _testclass = self.scene.getSootClass("org.red.cute.window.SimpleWindow")
-                self.tracker.append([str(method) for method in _testclass.getMethods()])
 
                 self.tracker.append(method_name)
 
