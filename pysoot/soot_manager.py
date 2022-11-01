@@ -95,6 +95,11 @@ class SootManager(object):
         else:
             raise Exception("invalid ir format")
 
+        whitelist = ["android.*", "androidx.*", "kotlin.*", "kotlinx.*", "com.facebook.*", "com.google.ads.*",
+                     "com.google.android.*", "com.google.analytics.*", "com.google.common.*", "com.google.gson.*",
+                     "com.google.protobuf.*", "com.google.tagmanager.*", "com.google.zxing.*", "org.apache.*"]
+        Options.v().set_no_bodies_for_excluded(True)
+        Options.v().set_exclude(whitelist)
         Options.v().set_allow_phantom_refs(True)
 
         # this options may or may not work
