@@ -9,7 +9,7 @@ l = logging.getLogger("pysoot.soot_manager")
 self_dir = os.path.dirname(os.path.realpath(__file__))
 self_dir = self_dir.replace("__pyclasspath__", "")  # needed because added by Jython
 
-# soot-trunk.jar is a slightly modified version of soot. 
+# soot-trunk.jar is a slightly modified version of soot.
 # At some point I will upload the modifcations and the compilation script somewhere
 sys.path.append(os.path.join(self_dir, "soot-trunk.jar"))
 import java.util.Collections as Collections
@@ -58,8 +58,13 @@ class SootManager(object):
         else:
             raise Exception("invalid ir format")
 
+        whitelist = ["android.*", "androidx.*", "kotlin.*", "kotlinx.*", "com.facebook.*", "com.google.ads.*",
+                     "com.google.android.*", "com.google.analytics.*", "com.google.common.*", "com.google.gson.*",
+                     "com.google.protobuf.*", "com.google.tagmanager.*", "com.google.zxing.*", "org.apache.*"]
+        Options.v().set_no_bodies_for_excluded(True)
+        Options.v().set_exclude(whitelist)
         Options.v().set_allow_phantom_refs(True)
-        
+
         # this options may or may not work
         Options.v().setPhaseOption("cg", "all-reachable:true")
         Options.v().setPhaseOption("jb.dae", "enabled:false")
